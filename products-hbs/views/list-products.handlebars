@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de productos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    .img-product {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+    }
+  </style>
+</head>
+<body>
+    <section class="container">
+    <div class="row">
+      <div class="col-12 col-lg-12">
+        <h1 class="text-center my-3">Lista de Productos</h1>
+      </div>
+      <div class="col-12 col-md-8 offset-md-2">
+        {{#if products}} 
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody id="wrapper-products">
+                {{#each products}}
+                    <tr>
+                        <th scope="row">
+                            {{@index}}
+                        </th>
+                        <td>
+                            {{this.title}}
+                        </td>
+                        <td>$ {{this.price}} MXN</td>
+                        <td>
+                            <img class="img-product" src={{this.thumbnail}} alt={{this.title}} >
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+          </table>
+          {{else}}
+            <div role="alert" class="alert alert-warning">
+              No se encuentran productos
+            </div>
+          {{/if}}
+      </div>
+
+      <div class="col-12 d-flex justify-content-center">
+        <a href="/" class="btn btn-success">Crear Producto</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
