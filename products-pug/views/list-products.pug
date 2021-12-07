@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Lista de Productos
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
+             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+        style(type="text/css").
+            .img-product {
+                border-radius: 50%;
+                width: 32px;
+                height: 32px;
+            }
+    body 
+
+        section.container
+            div.row
+                div.col-12
+                    h1.text-center.my-3 Lista de Productos
+                div.col-12.col-md-8.offset-md-2
+                    if products.length != 0
+                        table.table
+                            thead.thead-dark
+                                tr
+                                    th(scope="col") #
+                                    th(scope="col") Nombre
+                                    th(scope="col") Precio
+                                    th(scope="col") Imagen
+                                    th(scope="col") &nbsp;
+                            tbody(id="wrapper-products")
+                                each product, index in products
+                                    tr
+                                        th(scope="row")= index + 1
+                                        td= product.title
+                                        td= product.price
+                                        td 
+                                            img(src=product.thumbnail alt=product.title).img-product
+                    else 
+                        div(role="alert").alert.alert-warning No se encuentran productos
+                            a.ml-2(href='/') Crear Producto
+                div.col-12.d-flex.justify-content-center
+                    a.btn.btn-success(href='/') Crear Producto
+
+
+

@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Sabritas Sal",
+    "price": 14,
+    "thumbnail": "https://dulfi.com/wp-content/uploads/SABRITAS-LIMON.jpg",
+    "id": 1
+  },
+  {
+    "title": "Sabritas Flamin",
+    "price": 14,
+    "thumbnail": "https://dulfi.com/wp-content/uploads/SABRITAS-LIMON.jpg",
+    "id": 2
+  },
+  {
+    "title": "Donas Espolvoriadas",
+    "price": 15,
+    "thumbnail": "https://dulfi.com/wp-content/uploads/SABRITAS-LIMON.jpg",
+    "id": 3
+  },
+  {
+    "title": "Choco-roles",
+    "price": 16,
+    "thumbnail": "https://dulfi.com/wp-content/uploads/SABRITAS-LIMON.jpg",
+    "id": 4
+  },
+  {
+    "title": "Fritos Sal",
+    "price": "11",
+    "thumbnail": "https://lagranbodega.vteximg.com.br/arquivos/ids/277254-1000-1000/7501011131125_3.jpg?v=636897302087100000",
+    "id": 5
+  }
+]
