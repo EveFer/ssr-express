@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+
 </head>
 <body>
   <section class="container">
@@ -15,7 +18,7 @@
         <h1 class="text-center my-3">Registro de Productos</h1>
       </div>
       <div class="col-12 col-md-6 offset-md-3">
-        <form action="/products" method="post" class="rounded border border-dark p-5 form-product">
+        <form class="rounded border border-dark p-5 form-product">
           <div class="form-group">
             <label for="name">Nombre</label>
             <input name="title" type="text" class="form-control" id="title" required>
@@ -29,11 +32,53 @@
             <input name="thumbnail" type="text" class="form-control" id="thumbnail" required>
           </div>
           <div>
-            <button type="submit" id="btn-save" class="btn btn-primary">Guardar producto</button>
+            <button type="button" id="btn-save" class="btn btn-primary">Guardar producto</button>
           </div>
         </form>
       </div>
     </div>
+    <div class="col-12 col-lg-12">
+        <h1 class="text-center my-3">Lista de Productos</h1>
+    </div>
+    <div class="col-12 col-md-8 offset-md-2">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody id="wrapper-products">
+
+            </tbody>
+          </table>
+          <div role="alert" class="alert alert-warning d-none">
+            No se encuentran productos
+          </div>
+
+      </div>
   </section>
+  <section class="chat border rounded">
+    <div>
+      <h4>Resuelve tus dudas</h4>
+      <form action="" id="form-email">
+        <input type="email" name="email" id="email-chat" placeholder="Ingresa tu email" class="form-control">
+      </form>
+    </div>
+
+    <section class="chat-messages border rounded"></section>
+
+    <form action="" id="form-message" class="d-none">
+      <div class="d-flex">
+        <input type="text" id="message" placeholder="Ingresa tu mensaje" class="form-control" >
+        <button type="button" id="send-message" class="btn btn-primary">Enviar</button>
+      </div>
+    </form>
+  </section>
+ <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script src="../js/main.js"></script>
 </body>
 </html>

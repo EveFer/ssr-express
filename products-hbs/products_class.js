@@ -35,7 +35,7 @@ class Contenedor {
             product.id = Contenedor.id
             products = [...products, product]
             await fs.promises.writeFile(this.file, JSON.stringify(products, null, 2))
-            return Contenedor.id
+            return products
 
         } catch (error) {
             throw new Error(error)

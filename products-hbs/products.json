@@ -28,5 +28,35 @@
     "price": "11",
     "thumbnail": "https://lagranbodega.vteximg.com.br/arquivos/ids/277254-1000-1000/7501011131125_3.jpg?v=636897302087100000",
     "id": 5
+  },
+  {
+    "title": "product test",
+    "price": "23",
+    "thumbnail": "https://lagranbodega.vteximg.com.br/arquivos/ids/277254-1000-1000/7501011131125_3.jpg?v=636897302087100000",
+    "id": 6
+  },
+  {
+    "title": "Mi producto",
+    "price": "50",
+    "thumbnail": "https://lagranbodega.vteximg.com.br/arquivos/ids/277254-1000-1000/7501011131125_3.jpg?v=636897302087100000",
+    "id": 7
+  },
+  {
+    "title": "ertyuhg",
+    "price": "456",
+    "thumbnail": "https://lagranbodega.vteximg.com.br/arquivos/ids/277254-1000-1000/7501011131125_3.jpg?v=636897302087100000",
+    "id": 8
+  },
+  {
+    "title": "test 2",
+    "price": "43",
+    "thumbnail": "https://lagranbodega.vteximg.com.br/arquivos/ids/277254-1000-1000/7501011131125_3.jpg?v=636897302087100000",
+    "id": 9
+  },
+  {
+    "title": "wieow",
+    "price": "34",
+    "thumbnail": "https://lagranbodega.vteximg.com.br/arquivos/ids/277254-1000-1000/7501011131125_3.jpg?v=636897302087100000",
+    "id": 10
   }
 ]
