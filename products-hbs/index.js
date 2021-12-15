@@ -60,7 +60,11 @@ io.on('connection', async (socket) => {
         content.push(message)
         fs.writeFileSync('./messages..json', JSON.stringify(content, null, 2))
         const allMessage = JSON.parse(fs.readFileSync('./messages..json', 'utf8'))
-        socket.emit('all-messages', allMessage)
+        io.sockets.emit('all-messages', allMessage)
+    })
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected')
     })
 
 
