@@ -27,11 +27,11 @@ socket.on('products', ({products}) => {
                     ${index + 1}
                 </th>
                 <td>
-                    ${product.title}
+                    ${product.name}
                 </td>
                 <td>$ ${product.price} MXN</td>
                 <td>
-                    <img class="img-product" src=${product.thumbnail} alt=${product.title} >
+                    <img class="img-product" src=${product.url} alt=${product.title} >
                 </td>
             </tr>
         `

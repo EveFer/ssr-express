@@ -2,10 +2,11 @@ const express = require('express')
 const {Server: HttpServer} = require('http')
 const {Server: IOServer} = require('socket.io')
 const handlebars = require('express-handlebars')
-const fs = require('fs')
-const Product = require('./products_class')
+const Container = require('./container_class')
+const { options } = require('./db/options')
 
-const products = new Product('./products.json')
+const products = new Container(options, 'products')
+const messages = new Container(options, 'messages')
 
 const app = express()
 const httpServer = new HttpServer(app)
@@ -46,28 +47,25 @@ io.on('connection', async (socket) => {
     console.log('New user connected')
     const allProducts = await products.getAll()
     socket.emit('products', {products: allProducts})
-    const allMessage = JSON.parse(fs.readFileSync('./messages..json', 'utf8'))
+    const allMessage = await messages.getAll()
     socket.emit('all-messages', allMessage)
    
     socket.on('new-product', async (product) => {
-       const allProducts = await products.save(product)
+       await products.save(product)
+       const allProducts = await products.getAll()
        io.sockets.emit('products', {products: allProducts})
     })
 
-    socket.on('send-message', (message) => {
-        const content = JSON.parse(fs.readFileSync('./messages..json', 'utf8'))
+    socket.on('send-message', async (message) => {
         message.date = `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`
-        content.push(message)
-        fs.writeFileSync('./messages..json', JSON.stringify(content, null, 2))
-        const allMessage = JSON.parse(fs.readFileSync('./messages..json', 'utf8'))
+        await messages.save(message)
+        const allMessage = await messages.getAll()
         io.sockets.emit('all-messages', allMessage)
     })
 
     socket.on('disconnect', () => {
         console.log('User disconnected')
     })
-
-
 })
 
 
