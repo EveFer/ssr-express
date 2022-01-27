@@ -3,9 +3,30 @@ const socket = io.connect()
 
 let email
 
-socket.on('all-messages', messages => {
+
+
+const author = new normalizr.schema.Entity('author', {idAttribute: 'email'})
+
+const message = new normalizr.schema.Entity('message', {
+    author: author
+})
+
+const messages = new normalizr.schema.Entity('messages', {
+    messages: [message]
+})
+
+socket.on('all-messages', messagesNormalized => {
    const wrapperMessages = document.querySelector('.chat-messages')
-   const allMessages = messages.reduce((acc, message) => {
+   const messagesDesnormalized =  normalizr.denormalize(messagesNormalized.result, messages, messagesNormalized.entities )
+   
+   const lengthNormalized = messagesNormalized.length
+   const lengthDesnormalized = messagesDesnormalized.length
+
+   const percent = lengthDesnormalized * 100 / lengthNormalized
+
+   console.log('Porcentaje de compression: ',percent)
+   
+   const allMessages = messagesDesnormalized.reduce((acc, message) => {
        const msg = `
         <p>
         <strong>${message.email}</strong>

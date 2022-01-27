@@ -6,8 +6,12 @@ const Container = require('./container_class')
 const { options } = require('./db/options')
 
 const products = new Container(options, 'products')
-const messages = new Container(options, 'messages')
+// const messages = new Container(options, 'messages')
+const { messageDao } = require('./SelectSourceData')
 
+const getProducts = require('./faker/products')
+
+const normalizeMessages = require('./normalizer/getNormalizer')
 const app = express()
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
@@ -30,6 +34,22 @@ app.set('views', './views')
 //     }
 // })
 
+app.get('/api/productos-test', (req, res) => {
+    try {
+        res.json({
+            success: true,
+            data: {
+                productos: getProducts()
+            }
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            error: error.message
+        })
+    }
+})
+
 app.get('/', async (req, res) => {
     const allProducts = await products.getAll()
     res.render('products', {products: allProducts})
@@ -47,8 +67,9 @@ io.on('connection', async (socket) => {
     console.log('New user connected')
     const allProducts = await products.getAll()
     socket.emit('products', {products: allProducts})
-    const allMessage = await messages.getAll()
-    socket.emit('all-messages', allMessage)
+    const allMessage = await messageDao.getByIdOrAll()
+
+    socket.emit('all-messages', normalizeMessages(allMessage))
    
     socket.on('new-product', async (product) => {
        await products.save(product)
@@ -58,9 +79,9 @@ io.on('connection', async (socket) => {
 
     socket.on('send-message', async (message) => {
         message.date = `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`
-        await messages.save(message)
-        const allMessage = await messages.getAll()
-        io.sockets.emit('all-messages', allMessage)
+        await messageDao.save(message)
+        const allMessage = await messageDao.getByIdOrAll()
+        io.sockets.emit('all-messages', normalizeMessages(allMessage))
     })
 
     socket.on('disconnect', () => {
