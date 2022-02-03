@@ -16,7 +16,27 @@ const app = express()
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
 
+// session
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
+const MongoStore = require('connect-mongo')
+const advancedOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}
+
+app.use(cookieParser())
 app.use(express.urlencoded({extended: true}))
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: process.env.URL_MONGO,
+        mongoOptions: advancedOptions
+    }),
+    secret: 'my secret',
+    resave: false,
+    saveUninitialized: false
+}))
 
 app.use(express.static('./public'))
 app.engine('handlebars', handlebars.engine())
@@ -51,6 +71,17 @@ app.get('/api/productos-test', (req, res) => {
 })
 
 app.get('/', async (req, res) => {
+    res.render('login')
+})
+
+app.post('/', async (req, res) => {
+    res.cookie("auth", "login", {maxAge: 100000})
+    req.session.user = req.body.name
+    const allProducts = await products.getAll()
+    res.render('/products', {products: allProducts})
+})
+
+app.get('/products', async (req, res) => {
     const allProducts = await products.getAll()
     res.render('products', {products: allProducts})
 })
